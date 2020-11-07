@@ -189,8 +189,11 @@ app.patch("/user/:uid", upload.single('photo') ,async function (req, res) {
   try {
     let uid = req.params.uid;
     let updateObject = req.body;
-    let pImage = "/user/"+req.file.filename;
-    updateObject.pImage = pImage;
+    // console.log(req.file);
+    if(req.file){
+      let pImage = "/user/"+req.file.filename;
+      updateObject.pImage = pImage;
+    }
     console.log(updateObject);
     let data = await updateUserById(uid, updateObject);
     res.json({
@@ -719,10 +722,6 @@ app.delete("/post/:pid" , async function(req,res){
 //     message:"received image succesfully"
 //   })
 // })
-
-
-
-
 
 
 
