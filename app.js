@@ -163,13 +163,16 @@ app.get("/user/:uid", async function (req, res) {
 // update by id
 function updateUserById(uid, updateObject) {
   return new Promise((resolve, reject) => {
+    
     // UPDATE user_table
     // SET
     // name = "" , handle = "" , is_public = ""
     // WHERE uid = "";
     let sql = `UPDATE user_table SET`;
     for (key in updateObject) {
-      sql += ` ${key} = "${updateObject[key]}" ,`;
+      if(updateObject[key]){
+        sql += ` ${key} = "${updateObject[key]}" ,`;
+      }
     }
     sql = sql.slice(0, -1);
     sql += ` WHERE uid = "${uid}"`;
