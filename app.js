@@ -170,7 +170,7 @@ function updateUserById(uid, updateObject) {
     // WHERE uid = "";
     let sql = `UPDATE user_table SET`;
     for (key in updateObject) {
-      if(updateObject[key]){
+      if(updateObject[key] != "undefined"){
         sql += ` ${key} = "${updateObject[key]}" ,`;
       }
     }
