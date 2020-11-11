@@ -55,6 +55,38 @@ function fileFilter (req, file, cb) {
 
 const upload = multer({ storage: storage,fileFilter : fileFilter })
 
+
+//get all post by id
+function getPostById(uid){
+  return new Promise((resolve, reject) => {
+    let sql = `SELECT * FROM post WHERE uid = "${uid}" `;
+    connection.query(sql, function (error, data) {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(data);
+      }
+    });
+  });
+}
+
+app.get("/profile/:uid", async function(req, res){
+  try{
+    let uid = req.params.uid;
+    let data = await getPostById(uid);
+    res.json({
+      message: "get all post by id succesfully",
+      user: data,
+    });
+  }
+  catch(err){
+    res.json({
+      message: "Failed to get by id",
+      error: err,
+    });
+  }
+})
+
  
 
 
