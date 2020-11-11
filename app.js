@@ -70,7 +70,7 @@ function getPostById(uid){
   });
 }
 
-app.get("/profile/:uid", async function(req, res){
+app.get("/mypost/:uid", async function(req, res){
   try{
     let uid = req.params.uid;
     let data = await getPostById(uid);
